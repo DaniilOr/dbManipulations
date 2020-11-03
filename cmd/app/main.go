@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/DaniilOr/webGo/cmd/app/Server"
-	"github.com/DaniilOr/webGo/src/service"
+	"github.com/DaniilOr/dbManipulations/src/Server"
+	"github.com/DaniilOr/dbManipulations/src/service"
 	"log"
 	"net"
 	"net/http"
@@ -12,6 +12,7 @@ const defaultPort = "8888"
 const defaultHost = "0.0.0.0"
 
 func main() {
+	os.Setenv("dsn", "postres://app:pass@localhost:5432/bankdb")
 	os.Setenv("PORT", defaultPort)
 	os.Setenv("HOST", defaultHost)
 	port, ok := os.LookupEnv("PORT")

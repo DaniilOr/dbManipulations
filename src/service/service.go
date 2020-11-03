@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"errors"
-	"github.com/DaniilOr/webGo/src/models"
+	"github.com/DaniilOr/dbManipulations/src/models"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"log"
 	"os"
@@ -11,7 +11,7 @@ import (
 var (
 	errNoEnv = errors.New("Envirinment was not set")
 )
-type Interface interface {
+type ServiceInterface interface {
 	GetCards(int64) ([]models.CardDTO, error)
 	GetTransactions(int64) ([]models.TransactionsDTO, error)
 	GetMostSpent(int64)(string, int64, error)
@@ -79,7 +79,6 @@ func (s*Service) GetTransactions(cid int64) ([]models.TransactionsDTO, error){
 	}
 	transactions := []models.TransactionsDTO{}
 	for rows.Next(){
-		log.Println("Scuck")
 		var transaction models.TransactionsDTO
 		rows.Scan(
 			&transaction.Id,
@@ -99,7 +98,7 @@ func (s*Service) GetTransactions(cid int64) ([]models.TransactionsDTO, error){
 func (s*Service) GetMostSpent(cid int64) (string, int64, error){
 	rows, err := s.db.Query(s.ctx, `
 	SELECT mcc, amount FROM transactions
-	WHERE card=$1
+	WHERE card=$1 AND AMOUNT < 0
 	LIMIT 50
 `, cid)
 	if err != nil{
@@ -113,10 +112,12 @@ func (s*Service) GetMostSpent(cid int64) (string, int64, error){
 			&transaction.Mcc,
 			&transaction.Amount,
 			)
-		if(transaction.Amount < 0){
-			mapper[transaction.Mcc] += -transaction.Amount
+		mapper[transaction.Mcc] += -transaction.Amount
 
-		}
+	}
+	if rows.Err() != nil{
+		log.Println(rows.Err())
+		return "", 0, rows.Err()
 	}
 	var maxKey string
 	max := int64(0)
@@ -131,7 +132,7 @@ func (s*Service) GetMostSpent(cid int64) (string, int64, error){
 func (s*Service) GetMostVisited(cid int64) (string, int64, error){
 	rows, err := s.db.Query(s.ctx, `
 	SELECT mcc, amount FROM transactions
-	WHERE card=$1
+	WHERE card=$1 AND AMOUNT < 0
 	LIMIT 50
 `, cid)
 	if err != nil{
@@ -145,9 +146,12 @@ func (s*Service) GetMostVisited(cid int64) (string, int64, error){
 			&transaction.Mcc,
 			&transaction.Amount,
 		)
-		if(transaction.Amount < 0){
-			mapper[transaction.Mcc]++
-		}
+		mapper[transaction.Mcc]++
+
+	}
+	if rows.Err() != nil{
+		log.Println(rows.Err())
+		return "", 0, rows.Err()
 	}
 	var maxKey string
 	max := int64(0)
