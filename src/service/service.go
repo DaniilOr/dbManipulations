@@ -123,7 +123,7 @@ func (s*Service) GetMostSpent(cid int64) (string, int64, error){
 		log.Println(rows.Err())
 		return "", 0, rows.Err()
 	}
-	return  mcc, spendings, nil
+	return  mcc, -1 * spendings, nil
 }
 func (s*Service) GetMostVisited(cid int64) (string, int64, error){
 	rows, err := s.db.Query(s.ctx, `
