@@ -97,69 +97,63 @@ func (s*Service) GetTransactions(cid int64) ([]models.TransactionsDTO, error){
 }
 func (s*Service) GetMostSpent(cid int64) (string, int64, error){
 	rows, err := s.db.Query(s.ctx, `
-	SELECT mcc, amount FROM transactions
-	WHERE card=$1 AND AMOUNT < 0
-	LIMIT 50
+	SELECT mcc, sm FROM 
+	(
+		SELECT mcc, SUM(amount) as sm FROM transactions
+		WHERE card=$1 AND AMOUNT < 0
+
+		GROUP BY mcc
+		ORDER BY sm
+	) AS x
+	LIMIT 1;
 `, cid)
 	if err != nil{
 		log.Println(err)
 		return "", 0, err
 	}
-	mapper := make(map[string]int64)
+	var mcc string
+	var spendings int64
 	for rows.Next(){
-		var transaction models.TransactionsDTO
 		rows.Scan(
-			&transaction.Mcc,
-			&transaction.Amount,
+			&mcc,
+			&spendings,
 			)
-		mapper[transaction.Mcc] += -transaction.Amount
-
 	}
 	if rows.Err() != nil{
 		log.Println(rows.Err())
 		return "", 0, rows.Err()
 	}
-	var maxKey string
-	max := int64(0)
- 	for key, value := range mapper{
- 		if value > max{
- 			max = value
- 			maxKey = key
-		}
-	}
-	return  maxKey, max, nil
+	return  mcc, spendings, nil
 }
 func (s*Service) GetMostVisited(cid int64) (string, int64, error){
 	rows, err := s.db.Query(s.ctx, `
-	SELECT mcc, amount FROM transactions
-	WHERE card=$1 AND AMOUNT < 0
-	LIMIT 50
+	SELECT mcc, cnt FROM
+	(
+		SELECT mcc, COUNT(*) as cnt
+		FROM transactions
+		WHERE card=$1 AND amount < 0
+		GROUP BY mcc
+		ORDER BY cnt DESC
+	) as x
+	LIMIT 1
 `, cid)
 	if err != nil{
 		log.Println(err)
 		return "", 0, err
 	}
-	mapper := make(map[string]int64)
+	var mcc string
+	var counter int64
 	for rows.Next(){
-		var transaction models.TransactionsDTO
+
 		rows.Scan(
-			&transaction.Mcc,
-			&transaction.Amount,
+			&mcc,
+			&counter,
 		)
-		mapper[transaction.Mcc]++
 
 	}
 	if rows.Err() != nil{
 		log.Println(rows.Err())
 		return "", 0, rows.Err()
 	}
-	var maxKey string
-	max := int64(0)
-	for key, value := range mapper{
-		if value > max{
-			max = value
-			maxKey = key
-		}
-	}
-	return  maxKey, max, nil
+	return  mcc, counter, nil
 }

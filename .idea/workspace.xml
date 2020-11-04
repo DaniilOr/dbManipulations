@@ -20,9 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a817172-2975-4e01-b3c6-e35a7b510e9f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/app/Server/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/Server/server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmd/app/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/app/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-entrypoint-initdb.d/02data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docker-entrypoint-initdb.d/02data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,20 +219,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.requests#9">
-    <configuration name="go build github.com/DaniilOr/webGo/cmd/app" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Build.go build github.com/DaniilOr/dbManipulations/cmd/app">
+    <configuration name="01schema.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/docker-entrypoint-initdb.d/01schema.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="6a2ff52d-b3ed-4458-aed2-1b8f0acc473d" />
+      <method v="2" />
+    </configuration>
+    <configuration name="02data.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/docker-entrypoint-initdb.d/02data.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="6a2ff52d-b3ed-4458-aed2-1b8f0acc473d" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build github.com/DaniilOr/dbManipulations/cmd/app" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="dbManipulations" />
       <working_directory value="$PROJECT_DIR$" />
       <kind value="PACKAGE" />
       <filePath value="$PROJECT_DIR$/cmd/app/main.go" />
-      <package value="github.com/DaniilOr/webGo/cmd/app" />
+      <package value="github.com/DaniilOr/dbManipulations/cmd/app" />
       <directory value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration name="requests#6" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/test/requests.http" index="6" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="requests#7" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/test/requests.http" index="7" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="requests#8" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$PROJECT_DIR$/test/requests.http" index="8" runType="Run single request">
@@ -242,11 +249,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/DaniilOr/dbManipulations/cmd/app" />
+        <item itemvalue="Database Script.02data.sql" />
+        <item itemvalue="Database Script.01schema.sql" />
         <item itemvalue="HTTP Request.requests#9" />
         <item itemvalue="HTTP Request.requests#8" />
-        <item itemvalue="Go Build.go build github.com/DaniilOr/webGo/cmd/app" />
-        <item itemvalue="HTTP Request.requests#7" />
-        <item itemvalue="HTTP Request.requests#6" />
       </list>
     </recent_temporary>
   </component>
@@ -264,6 +271,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -277,22 +285,22 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="669" y="355" width="643" height="410" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1848.1053@72.27.1848.1053" timestamp="1604248218280" />
-    <state width="1802" height="275" key="GridCell.Tab.0.bottom" timestamp="1604252435922">
+    <state width="1802" height="275" key="GridCell.Tab.0.bottom" timestamp="1604505700995">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1604252435922" />
-    <state width="1802" height="275" key="GridCell.Tab.0.center" timestamp="1604252435921">
+    <state width="1802" height="275" key="GridCell.Tab.0.bottom/72.27.1848.1053@72.27.1848.1053" timestamp="1604505700995" />
+    <state width="1802" height="275" key="GridCell.Tab.0.center" timestamp="1604505700994">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1604252435921" />
-    <state width="1802" height="275" key="GridCell.Tab.0.left" timestamp="1604252435921">
+    <state width="1802" height="275" key="GridCell.Tab.0.center/72.27.1848.1053@72.27.1848.1053" timestamp="1604505700994" />
+    <state width="1802" height="275" key="GridCell.Tab.0.left" timestamp="1604505700994">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1604252435921" />
-    <state width="1802" height="275" key="GridCell.Tab.0.right" timestamp="1604252435921">
+    <state width="1802" height="275" key="GridCell.Tab.0.left/72.27.1848.1053@72.27.1848.1053" timestamp="1604505700994" />
+    <state width="1802" height="275" key="GridCell.Tab.0.right" timestamp="1604505700994">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state width="1802" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1604252435921" />
+    <state width="1802" height="275" key="GridCell.Tab.0.right/72.27.1848.1053@72.27.1848.1053" timestamp="1604505700994" />
     <state x="659" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1604406219433">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>

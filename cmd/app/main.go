@@ -12,7 +12,7 @@ const defaultPort = "8888"
 const defaultHost = "0.0.0.0"
 
 func main() {
-	os.Setenv("dsn", "postres://app:pass@localhost:5432/bankdb")
+	os.Setenv("dsn", "postgres://app:pass@localhost:5432/bankdb")
 	os.Setenv("PORT", defaultPort)
 	os.Setenv("HOST", defaultHost)
 	port, ok := os.LookupEnv("PORT")
